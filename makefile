@@ -198,6 +198,7 @@ SRC= palindrome_number_cleancode.cpp
 SRC= swap_nodes_in_pairs.cpp
 SRC= merge_k_lists.cpp
 SRC= merge_k_sorted_lists_cleancode.c
+SRC= merge_k_sorted_lists_cleancode.c
 
 # all: $(SRC)
 #    $(CPP) $(SRC) -o a  -std=c++0x -g
