@@ -61,22 +61,24 @@ bool isAdditiveNumber(char* num) {
 
        // the length of left string is enough, so traverse left string to detect if additive number exists
        h = j+1;  // h is the starting position of third number
+       char *first2 = first;
+       bool flag = false;;
 
        do {
-            sum = add_two_number(first, second);
+            sum = add_two_number(first2, second);
             len_sum = strlen(sum);
 
-            free(first);
-            first = second;
+            // printf("first: %s\n", first2);
+            // printf("second: %s\n", second);
+            // printf("sum: %s\n", sum);
+
+            if (first2 != first) free(first2);
+            first2 = second;
             second = sum;
 
             // obviously left string will not match sum
             if(len_sum > len - h)
                 break;
-
-           // printf("first: %s\n", first2);
-           // printf("second: %s\n", second);
-           // printf("sum: %s\n", sum);
 
            // if sum matches left string?
            for(k = 0; k < len_sum && sum[k] == num[h+k]; k++);
@@ -84,6 +86,7 @@ bool isAdditiveNumber(char* num) {
                break;
 
            // left string matches, move forward
+           flag = true;
            h = h + len_sum;
        } while (h < len);
 
@@ -91,7 +94,7 @@ bool isAdditiveNumber(char* num) {
 
        // find the solution, return true
        if (h == len)
-            return true;
+            return flag;
      } // for j ...
 
      free(first);
@@ -108,8 +111,11 @@ int main() {
   char s[] = "112358";
   printf("%s : %d\n", s, isAdditiveNumber(s));
 
-  char s1[] = "199100199";
+  char s1[] = "198019823962";
   printf("%s : %d\n", s1, isAdditiveNumber(s1));
+
+  char s2[] = "10";
+  printf("%s : %d\n", s2, isAdditiveNumber(s2));
 
   return 0;
 }
