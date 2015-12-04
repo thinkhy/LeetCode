@@ -54,10 +54,10 @@ bool isAdditiveNumber(char* num) {
      strncpy(first, num, i+1);
      first[i+1] = '\0';
 
-     for(j = i+1; j <= len/2; j++) {
+     for(j = i+1; j-i <= len-j-1; j++) {
        second = (char*)malloc(j-i+1);
        strncpy(second, num+i+1, j-i);
-       second[j-i+1] = '\0';
+       second[j-i] = '\0';
 
        // the length of left string is enough, so traverse left string to detect if additive number exists
        h = j+1;  // h is the starting position of third number
@@ -68,16 +68,19 @@ bool isAdditiveNumber(char* num) {
             sum = add_two_number(first2, second);
             len_sum = strlen(sum);
 
-            // printf("first: %s\n", first2);
-            // printf("second: %s\n", second);
-            // printf("sum: %s\n", sum);
+            /*
+            printf("first: %s\n", first2);
+            printf("second: %s\n", second);
+            printf("sum: %s\n", sum);
+            printf("num: %s\n", num);
+            */
 
             if (first2 != first) free(first2);
             first2 = second;
             second = sum;
 
             // obviously left string will not match sum
-            if(len_sum > len - h)
+            if(sum[0] == '0' || len_sum > len - h)
                 break;
 
            // if sum matches left string?
@@ -90,11 +93,14 @@ bool isAdditiveNumber(char* num) {
            h = h + len_sum;
        } while (h < len);
 
+       free(first2);
        free(second);
 
        // find the solution, return true
-       if (h == len)
-            return flag;
+       if (flag && h == len) {
+          free(first);
+          return true;
+       }
      } // for j ...
 
      free(first);
@@ -111,12 +117,12 @@ int main() {
   char s[] = "112358";
   printf("%s : %d\n", s, isAdditiveNumber(s));
 
-  char s1[] = "198019823962";
-  printf("%s : %d\n", s1, isAdditiveNumber(s1));
 
   char s2[] = "10";
   printf("%s : %d\n", s2, isAdditiveNumber(s2));
 
+  char s1[] = "198019823962";
+  printf("%s : %d\n", s1, isAdditiveNumber(s1));
   return 0;
 }
 
