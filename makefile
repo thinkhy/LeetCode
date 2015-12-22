@@ -201,6 +201,9 @@ SRC= merge_k_sorted_lists_cleancode.c
 SRC= range_sum_query_mutable.c
 SRC= additive_number.c
 SRC= minimum_height_trees.c
+SRC= 309_sell_stock.c
+SRC= 316_remove_duplicate_letters.c
+
 CFLAG=-Wimplicit-function-declaration
 
 # all: $(SRC)
