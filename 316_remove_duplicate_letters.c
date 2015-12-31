@@ -22,64 +22,42 @@ Subscribe to see which companies asked this question
 char* removeDuplicateLetters(char* s) {
     if (s == NULL) return NULL;
 
-    static int  dic[26];
-    static int  pos[26];
-    int i, j, cnt, top, len;
-    char *result;
-    memset(dic, 0, sizeof(dic)/sizeof(*dic));
-    memset(dic, 0xFF, sizeof(pos)/sizeof(*pos));
+    static int  lastPos[26];
+    static short  included[26];
+    char *stash;
+    int i, cnt, len;
+
     len = strlen(s);
-    top = 0;
+    memset(included, 0, sizeof(included));
 
-    result = (char*)malloc(len+1);
-    
-    for(i = 0; i < strlen(s); i++) {
+    for(i = 0; i < 26; i++)
+       lastPos[i] = -1;
+
+    for(cnt = 0, i = len-1; i >= 0; i--) {
        int num = s[i]-'a';
-       dic[num]++;   
-       if (dic[num] == 1) { // appear for the first time
-          pos[num] = i;
-       }
-       else {
-          if (pos[num]++;
+       if (lastPos[num] == -1) { // appear for the first time
+          lastPos[num] = i;
+          cnt++;
        }
     }
+    stash = (char*)malloc(cnt+1);
 
-    for(cnt = 0, i = 0; i < strlen(s); i++) {
-       if(dic[s[i]-'a']-- == 1)	
-          result[cnt++] = s[i]; 
+    for(cnt = 0, i = 0; i < len; i++) {
+       if (included[s[i]-'a'] == 0) {
+           while(cnt > 0 && stash[cnt-1] > s[i] && lastPos[stash[cnt-1]-'a'] > i) {
+               included[stash[cnt-1]-'a'] = 0;
+               cnt--;
+           }
+           stash[cnt++] = s[i];
+           included[s[i]-'a'] = 1;
+           stash[cnt] = '\0';
+       }
     }
-    result[cnt] = '\0';
+    stash[cnt] = '\0';
 
-    return result;
+    return stash;
 }
 
-/*
-class Solution {
-public:
-    string removeDuplicateLetters(string s) {
-        unordered_map<char, int> cnts;
-        string ret;
-        stack<char> stk;
-        vector<bool> isVisited(26, false);
-        for (char each : s) cnts[each] ++;
-        for (int i = 0; i < s.size(); cnts[s[i]] --, ++ i) {
-            if (isVisited[s[i] - 'a'] || (!stk.empty() && stk.top() == s[i])) continue;
-            while (!stk.empty() && stk.top() > s[i] && cnts[stk.top()] > 0) {
-                isVisited[stk.top() - 'a'] = false;
-                stk.pop();
-            }
-            stk.push(s[i]);
-            isVisited[s[i] - 'a'] = true;
-        }
-        while (!stk.empty()) {
-            ret.push_back(stk.top());
-            stk.pop();
-        }
-        reverse(ret.begin(), ret.end());
-        return ret;
-    }
-};
-*/
 
 int main() {
 
@@ -96,6 +74,20 @@ int main() {
    assert(strcmp(expected2, result2) == 0);
    printf("Second case: OK\n");
    free(result2);
+
+   char s3[] = "thesqtitxyetpxloeevdeqifkz";
+   char expected3[] = "hesitxyplovdqfkz";
+   char *result3 = removeDuplicateLetters(s3);
+   assert(strcmp(expected3, result3) == 0);
+   printf("Second case: OK\n");
+   free(result3);
+
+   char s4[] = "mitnlruhznjfyzmtmfnstsxwktxlboxutbic";
+   char expected4[] = "ilrhjfyzmnstwkboxuc";
+   char *result4 = removeDuplicateLetters(s4);
+   assert(strcmp(expected4, result4) == 0);
+   printf("Second case: OK\n");
+   free(result4);
 
    return 0;
 }
