@@ -203,6 +203,7 @@ SRC= additive_number.c
 SRC= minimum_height_trees.c
 SRC= 309_sell_stock.c
 SRC= 316_remove_duplicate_letters.c
+SRC= 315_countSmaller.c
 
 CFLAG=-Wimplicit-function-declaration
 
