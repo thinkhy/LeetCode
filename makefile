@@ -205,6 +205,7 @@ SRC= 309_sell_stock.c
 SRC= 316_remove_duplicate_letters.c
 SRC= 315_countSmaller.c
 SRC= 315_countSmaller_BIT.c
+SRC= 313_super_ugly_number.c
 
 CFLAG=-Wimplicit-function-declaration
 
