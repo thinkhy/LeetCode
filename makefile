@@ -206,6 +206,7 @@ SRC= 316_remove_duplicate_letters.c
 SRC= 315_countSmaller.c
 SRC= 315_countSmaller_BIT.c
 SRC= 313_super_ugly_number.c
+SRC= 264_ugly_number_ii.c
 
 CFLAG=-Wimplicit-function-declaration
 
