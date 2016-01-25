@@ -206,14 +206,14 @@ SRC= 316_remove_duplicate_letters.c
 SRC= 315_countSmaller.c
 SRC= 315_countSmaller_BIT.c
 SRC= 313_super_ugly_number.c
-SRC= 264_ugly_number_ii.c
+SRC= 264_ugly_number_ii.cpp
 
 CFLAG=-Wimplicit-function-declaration
 
-# all: $(SRC)
-#    $(CPP) $(SRC) -o a  -std=c++0x -g
-all: $(SRC)
-	$(CC) $(CFLAG) $(SRC) -o a -g
+%: %.cpp
+	$(CPP) $< -o $@  -std=c++0x -g
+%: %.c
+	$(CC) $(CFLAG) $(SRC) -o $@ -g
 
 
 
