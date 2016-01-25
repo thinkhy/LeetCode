@@ -207,13 +207,14 @@ SRC= 315_countSmaller.c
 SRC= 315_countSmaller_BIT.c
 SRC= 313_super_ugly_number.c
 SRC= 264_ugly_number_ii.cpp
+SRC= 264_ugly_number_ii.c
 
 CFLAG=-Wimplicit-function-declaration
 
 %: %.cpp
 	$(CPP) $< -o $@  -std=c++0x -g
-%: %.c
-	$(CC) $(CFLAG) $(SRC) -o $@ -g
+all: 
+	$(CC) $(CFLAG) $(SRC) -o a -g
 
 
 
