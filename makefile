@@ -209,6 +209,7 @@ SRC= 313_super_ugly_number.c
 SRC= 264_ugly_number_ii.cpp
 SRC= 264_ugly_number_ii.c
 SRC= 329_lognest_increasing_path_in_a_matrix.c
+SRC= 26_remove_duplicates_from_sorted_array.c
 
 CFLAG=-Wimplicit-function-declaration
 
