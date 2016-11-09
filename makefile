@@ -211,6 +211,7 @@ SRC= 264_ugly_number_ii.c
 SRC= 329_lognest_increasing_path_in_a_matrix.c
 SRC= 26_remove_duplicates_from_sorted_array.c
 SRC= 409_longest_palindrome.c
+SRC= 11_container_with_most_water.go
 
 CFLAG=-Wimplicit-function-declaration
 
