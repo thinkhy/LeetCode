@@ -41,5 +41,31 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
    return head.Next
 }
 
+func mergeTwoLists_doublePoint(l1 *ListNode, l2 *ListNode) *ListNode {
+   var head *ListNode = nil
+   tail := &head
+
+   for l1 && l2 {
+       var tmp *ListNode
+       if l1.Val < l2.Val {
+          tmp = l1
+	  l1 = l1.Next
+       } else {
+          tmp = l2
+	  l2 = l2.Next
+       }
+
+       *tail = tmp
+       tail = &tmp.Next
+   }
+   if l1 == nil {
+     *tail = l2
+   } else {
+     *tail = l1
+   }
+
+   return head
+}
+
 func main() {
 }
