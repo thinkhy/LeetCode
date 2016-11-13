@@ -11,15 +11,57 @@ package main
 
 /**
  * Definition for singly-linked list.
+ **/
+type ListNode struct {
+	Val int
+	Next *ListNode
+}
+
+func swapPairs(head *ListNode) *ListNode {
+    var hh *ListNode
+    tail := &hh
+    cur := head
+
+    for cur != nil && cur.Next != nil {
+       *tail = cur.Next
+       tail = &(cur.Next)
+
+       tmp := cur.Next.Next
+       cur.Next.Next = cur
+       cur = tmp
+    }
+
+    if cur != nil {
+      *tail = cur
+    } else {
+      *tail = nil
+    }
+
+    return hh
+}
+
+/*
  * type ListNode struct {
  *     Val int
  *     Next *ListNode
  * }
+ *
  */
-func swapPairs(head *ListNode) *ListNode {
-
-}
-
 func main() {
+   head := new(ListNode)
+   head.Val = 1
+   prev := head
+   for i := 2; i <= 6; i++ {
+      prev.Next = new(ListNode)
+      prev.Next.Val = i
+      prev = prev.Next
+   }
 
+   h := swapPairs(head)
+   for h != nil {
+      println(h.Val)
+      h = h.Next
+   }
 }
+
+
