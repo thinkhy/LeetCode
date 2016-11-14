@@ -30,6 +30,41 @@ type TreeNode struct {
     Right *TreeNode
 }
 
+func hasPathSum_iterative(root *TreeNode, sum int) bool {
+  if root == nil { 
+     return false
+  }
+  stack := []*TreeNode{}
+  nums := []int{}
+
+  stack = append(stack, root)
+  nums = append(nums, root.Val)
+  for len(stack) > 0 {
+     // stack pop up
+     l := len(stack) 
+     cur, num := stack[l-1], nums[l-1]
+     stack, nums = stack[:l-1], nums[:l-1]
+
+     // leaf node
+     if cur.Left == nil && cur.Right == nil {
+        if num == sum {
+           return true
+        }
+     } else { // immediate node
+       if cur.Right != nil {
+	  stack = append(stack, cur.Right)
+	  nums = append(nums, num+cur.Right.Val)
+       }
+       if cur.Left != nil {
+	  stack = append(stack, cur.Left)
+	  nums = append(nums, num+cur.Left.Val)
+       }
+     }
+  }
+  return false
+}
+
+
 func hasPathSum(root *TreeNode, sum int) bool {
   if root == nil {
     return false // empty node shouldn't get ZERO value??
